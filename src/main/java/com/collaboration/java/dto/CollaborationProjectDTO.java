@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="COLLABORATION_PROJECT")
-public class CollaborationProject implements Serializable {
+public class CollaborationProjectDTO implements Serializable {
 
 
 	@Id
