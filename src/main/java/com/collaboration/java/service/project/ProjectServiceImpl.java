@@ -27,7 +27,6 @@ public class ProjectServiceImpl implements ProjectService {
 	@Transactional
 	public CollaborationProjectDTO getProjectbyId(Long project_id) throws Exception{
 		// TODO Auto-generated method stub
-		projDao = new ProjectDaoMySqlImpl();
 		return projDao.getProjectbyId(project_id);
 	}
 

@@ -38,7 +38,6 @@ public class CollaborationController {
 	{
 		
 		try {
-			ser = new ProjectServiceImpl();
 			return ser.getProjectbyId(project_id);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

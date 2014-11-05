@@ -6,6 +6,8 @@ import javax.annotation.Resource;
 import javax.sql.DataSource;
 import javax.transaction.TransactionManager;
 
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -16,11 +18,12 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.mybatis.spring.mapper.MapperFactoryBean;
+import org.mybatis.spring.mapper.MapperScannerConfigurer;
 
 
 @Configuration
 @EnableWebMvc
-@EnableTransactionManagement
 @PropertySource("classpath:application.properties")
 public class WebAppConfig {
 
@@ -38,24 +41,29 @@ public class WebAppConfig {
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		
-		dataSource.setDriverClassName(env.getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER));
-		dataSource.setUrl(env.getRequiredProperty(PROPERTY_NAME_DATABASE_URL));
-		dataSource.setUsername(env.getRequiredProperty(PROPERTY_NAME_DATABASE_USERNAME));
-		dataSource.setPassword(env.getRequiredProperty(PROPERTY_NAME_DATABASE_PASSWORD));
+		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+		dataSource.setUrl("jdbc:mysql://localhost:8889/COLLABORATION");
+		dataSource.setUsername("root");
+		dataSource.setPassword("root");
 		return dataSource;
 	}
 	
-	@Bean(name="txManager")
-	public DataSourceTransactionManager transactionManager()
+	@Bean(name="sqlSessionFactory")
+	public SqlSessionFactory sqlSessionFactory() throws Exception
 	{
-		DataSourceTransactionManager txManager = new DataSourceTransactionManager();
-		txManager.setDataSource(dataSource());
-		return null;
-		
+		SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
+	      sqlSessionFactory.setDataSource(dataSource());
+			return (SqlSessionFactory) sqlSessionFactory.getObject();
 	}
 	
-
-
+	@Bean
+	public MapperScannerConfigurer mapperScannerConfigurer() throws Exception
+	{
+		MapperScannerConfigurer configurer = new MapperScannerConfigurer();
+		configurer.setBasePackage("com.collaboration.java.ibatis.mapper");
+		configurer.setSqlSessionFactory(sqlSessionFactory());
+		return configurer;
+	}
 	
 
 }

@@ -18,12 +18,13 @@ import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Repository;
 
 import com.collaboration.java.dto.CollaborationProjectDTO;
+import com.collaboration.java.ibatis.mapper.ProjectMapper;
 
 @Repository
 public class ProjectDaoMySqlImpl implements ProjectDao {
 
 	@Autowired
-	private DataSource datasource;
+	private ProjectMapper projectMapper;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ProjectDaoMySqlImpl.class);
 	
@@ -33,7 +34,7 @@ public class ProjectDaoMySqlImpl implements ProjectDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+/*
 	@Override
 	public CollaborationProjectDTO getProjectbyId(Long project_id) throws Exception {
 		// TODO Auto-generated method stub
@@ -64,7 +65,13 @@ public class ProjectDaoMySqlImpl implements ProjectDao {
 		}
 		return colProj;	
 	}
-
+*/
+	@Override
+	public CollaborationProjectDTO getProjectbyId(Long project_id) throws Exception
+	{
+		return projectMapper.selectPerson(project_id);
+	}
+	
 	@Override
 	public CollaborationProjectDTO getProjectbyName(String name) {
 		// TODO Auto-generated method stub
