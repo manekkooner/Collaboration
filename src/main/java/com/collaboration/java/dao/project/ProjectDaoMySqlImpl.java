@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -28,12 +29,7 @@ public class ProjectDaoMySqlImpl implements ProjectDao {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ProjectDaoMySqlImpl.class);
 	
-	@Override
-	public CollaborationProjectDTO addProject(String name, String desc,
-			Long started_by, String created_by) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 /*
 	@Override
 	public CollaborationProjectDTO getProjectbyId(Long project_id) throws Exception {
@@ -69,7 +65,8 @@ public class ProjectDaoMySqlImpl implements ProjectDao {
 	@Override
 	public CollaborationProjectDTO getProjectbyId(Long project_id) throws Exception
 	{
-		return projectMapper.selectPerson(project_id);
+		//return projectMapper.selectPerson(project_id);
+		return projectMapper.getProjectById(project_id);
 	}
 	
 	@Override
@@ -84,17 +81,22 @@ public class ProjectDaoMySqlImpl implements ProjectDao {
 		return null;
 	}
 
-	@Override
-	public void updateProject(Long project_id, String name, String desc,
-			Long started_by, String created_by) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public boolean deleteProject(Long project_id) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	@Override
+	public void addProject(CollaborationProjectDTO dto) {
+		// TODO Auto-generated method stub
+		projectMapper.addProject(dto);
+	}
+	@Override
+	public void updateProject(Long project_id, String name, String desc,
+			Long started_by, Date created_dt) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.collaboration.java.service.project;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,12 +17,6 @@ public class ProjectServiceImpl implements ProjectService {
 	@Autowired
 	private ProjectDao projDao;
 	
-	@Override
-	public CollaborationProjectDTO addProject(String name, String desc,
-			Long started_by, String created_by) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	@Transactional
@@ -53,6 +48,12 @@ public class ProjectServiceImpl implements ProjectService {
 	public boolean deleteProject(Long project_id) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public void addProject(CollaborationProjectDTO dto) throws Exception {
+		projDao.addProject(dto);
+		
 	}
 
 }

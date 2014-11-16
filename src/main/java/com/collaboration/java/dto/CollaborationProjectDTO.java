@@ -19,6 +19,9 @@ public class CollaborationProjectDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String name;
 	private String description;
+	private long user_id;
+	private long first_workflow_id;
+	
 	public long getProject_id() {
 		return project_id;
 	}
@@ -36,6 +39,18 @@ public class CollaborationProjectDTO implements Serializable {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public long getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(long user_id) {
+		this.user_id = user_id;
+	}
+	public long getFirst_workflow_id() {
+		return first_workflow_id;
+	}
+	public void setFirst_workflow_id(long first_workflow_id) {
+		this.first_workflow_id = first_workflow_id;
 	}
 
 	
